@@ -1,4 +1,5 @@
 :root {
+	box-sizing: ;
 	font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
 	line-height: 1.5;
 	font-weight: 400;
@@ -14,20 +15,40 @@
 	-webkit-text-size-adjust: 100%;
 }
 
+html {
+	box-sizing: border-box;
+}
+*,
+*:before,
+*:after {
+	box-sizing: inherit;
+}
+
 body {
 	margin: 0;
-	display: flex;
-	place-items: center;
+	display: grid;
+	justify-items: center;
 	min-width: 320px;
+}
+
+#app {
 	min-height: 100vh;
+	width: clamp(320px, 100%, 900px);
+	background-color: rgba(146, 146, 146, 0.178);
+	margin: 0 auto;
+	padding: 1rem;
 }
 
-h1 {
-	font-size: 3.2em;
-	line-height: 1.1;
+.todo-list {
+	overflow-y: auto;
 }
 
-button {
+h2 {
+	margin: 0;
+}
+
+input {
+	width: 100%;
 	border-radius: 8px;
 	border: 1px solid transparent;
 	padding: 0.6em 1.2em;
@@ -35,20 +56,112 @@ button {
 	font-weight: bold;
 	font-family: inherit;
 	background-color: #1a1a1a;
+	color: #fff;
+	transition: border-color 0.25s;
+}
+
+input:focus {
+	outline: none;
+}
+.title-name {
+	width: fit-content;
+	padding: 0;
+	background-color: transparent;
+	size: 5;
+	padding-left: 0.1rem;
+}
+
+.options {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	grid-gap: 1rem;
+	margin: 1rem 0;
+}
+
+.radio {
+	font-weight: bold;
+	cursor: pointer;
+	background-color: dimgray;
+	border: 2px solid transparent;
+	border-radius: 8px;
+	display: grid;
+	gap: 1em;
+	padding: 1em;
+	justify-content: center;
+	align-items: center;
+	transition: 0.5s;
+}
+
+.active {
+	background-color: #646cff;
+}
+
+input[type='radio'] {
+	display: none;
+}
+
+.done {
+	text-decoration: line-through;
+	color: dimgray;
+}
+
+button {
+	width: 100%;
+	border-radius: 8px;
+	border: 2px solid transparent;
+	padding: 0.6em 1.2em;
+	font-size: 1em;
+	font-weight: bold;
+	font-family: inherit;
+	background-color: #646cff;
 	cursor: pointer;
 	transition: border-color 0.25s;
 }
-button:hover {
-	border-color: #646cff;
+button:hover,
+.radio:hover {
+	border-color: #d0d1da;
 }
 button:focus,
 button:focus-visible {
 	outline: 4px auto -webkit-focus-ring-color;
 }
 
-#app {
-	max-width: 1280px;
-	margin: 0 auto;
-	padding: 2rem;
-	text-align: center;
+.list {
+	height: 100%;
+	overflow-y: auto;
+	display: grid;
+	grid-gap: 1rem;
+	margin: 1rem 0;
+}
+
+.todo {
+	padding: 0.5rem;
+	background-color: #1a1a1a;
+	border-radius: 8px;
+	display: grid;
+	grid-template-columns: auto 7fr auto 1fr;
+	gap: 1rem;
+}
+
+.priority {
+	display: grid;
+	align-items: center;
+}
+
+.Urgent {
+	color: #ff6464;
+}
+
+.action {
+	display: grid;
+	align-items: center;
+	text-decoration: none;
+}
+
+.delete {
+	text-decoration: none;
+	background-color: rgb(155, 53, 53);
+	border-radius: 4px;
+	padding: 0.5rem 1rem;
+	align-self: center;
 }
