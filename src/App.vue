@@ -65,20 +65,19 @@ const addTodo = () => {
 	<main class="app">
 		<section class="greeting">
 			<h2 class="title">
-				What's up
+				What's up,
 				<input
 					type="text"
-					class="title"
+					class="title-name"
 					placeholder="Your name"
+					size="10"
 					v-model="name" />
-				?
 			</h2>
 		</section>
 		<section class="create-todo">
-			<h3>CREATE A TODO</h3>
+			<h3>Create a Task</h3>
 
 			<form v-on:submit.prevent="addTodo">
-				<h4>Your pending Tasks:</h4>
 				<input
 					type="text"
 					placeholder="Enter a todo"
@@ -87,7 +86,7 @@ const addTodo = () => {
 					v-on:keypress.Enter="addTodo" />
 
 				<div class="options">
-					<label>
+					<label class="radio" :class="priority == 'Pending' ? 'active' : ''">
 						<input
 							type="radio"
 							name="priority"
@@ -95,8 +94,9 @@ const addTodo = () => {
 							v-model="priority" />
 						<div>Pending</div>
 					</label>
-					<label>
+					<label class="radio" :class="priority == 'Urgent' ? 'active' : ''">
 						<input
+							class="radio"
 							type="radio"
 							name="priority"
 							value="Urgent"
@@ -112,18 +112,24 @@ const addTodo = () => {
 		</section>
 
 		<section class="todo-list">
-			<h3>To Do List</h3>
+			<h3>Your pending Tasks:</h3>
 			<div class="list">
 				<div
 					v-for="todo in todos_asc"
 					:class="`todo-item ${todo.done && 'done'}`">
-					<label>
+					<label class="todo">
 						<input
 							type="checkbox"
 							v-model="todo.done"
 							:class="`checkbox ${todo.priority}`" />
 						<div class="todo-content">
-							<input type="text" v-model="todo.content" /> {{ todo.content }}
+							<input
+								:class="`${todo.done && 'done'}`"
+								type="text"
+								v-model="todo.content" />
+						</div>
+						<div class="priority" :class="`${todo.priority}`">
+							{{ todo.priority }}
 						</div>
 						<div class="action">
 							<button class="delete" v-on:click="removeTodo(todo)">
@@ -133,9 +139,6 @@ const addTodo = () => {
 					</label>
 				</div>
 			</div>
-			{{ todos_asc }}
 		</section>
 	</main>
 </template>
-
-<style scoped></style>
