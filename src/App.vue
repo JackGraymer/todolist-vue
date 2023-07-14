@@ -31,7 +31,11 @@ watch(name, (newval) => {
 });
 
 onMounted(() => {
-	if (localStorage.name !== 'undefined' && localStorage.name !== '') {
+	if (
+		localStorage.name !== 'undefined' ||
+		localStorage.name !== '' ||
+		localStorage.name == null
+	) {
 		name.value = localStorage.getItem('name');
 	} else {
 		name.value = '';
